@@ -15,7 +15,8 @@
     "targets": [
       "node18-macos-x64"
     ],
-    "outputPath": "bin"
+    "outputPath": "bin",
+    "publicPackages": "*"
   },
   "author": "",
   "license": "Apache-2.0"

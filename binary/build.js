@@ -200,14 +200,13 @@ async function installNodeModuleInTempDirAndCopyToCurrent(packageName, toCopy) {
     fs.mkdirSync(targetDir, { recursive: true });
     console.log(`[info] Building ${target}...`);
     execCmdSync(
-      `npx pkg --no-bytecode --public-packages "*" --public pkgJson/${target} --out-path ${targetDir}`,
+      `npx pkg pkgJson/${target} --no-bytecode --public --out-path ${targetDir}`,
     );
 
     // Download and unzip prebuilt sqlite3 binary for the target
     console.log("[info] Downloading node-sqlite3");
-    const downloadUrl = `https://github.com/TryGhost/node-sqlite3/releases/download/v5.1.7/sqlite3-v5.1.7-napi-v6-${
-      target === "win32-arm64" ? "win32-ia32" : target
-    }.tar.gz`;
+    const downloadUrl = `https://github.com/TryGhost/node-sqlite3/releases/download/v5.1.7/sqlite3-v5.1.7-napi-v6-${target === "win32-arm64" ? "win32-ia32" : target
+      }.tar.gz`;
     execCmdSync(`curl -L -o ${targetDir}/build.tar.gz ${downloadUrl}`);
     execCmdSync(`cd ${targetDir} && tar -xvzf build.tar.gz`);
     fs.copyFileSync(
